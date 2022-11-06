@@ -1,0 +1,30 @@
+
+body {
+    background-color: rgb(175, 226, 255) !important;
+}
+
+.navbar{
+    background-color:  rgb(0, 162, 255);
+    box-shadow: 4px 4px rgba(0,0,0,0.1);
+}
+
+.navbar a{
+    color: white;
+}
+
+.navbar a:hover{
+    color: rgb(46, 106, 129);
+}
+.collapse a{
+    color: white;
+}
+
+.contaier-fluid {
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+.card:hover{
+    box-shadow: 4px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
