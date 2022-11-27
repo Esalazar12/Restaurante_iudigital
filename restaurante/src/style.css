@@ -1,0 +1,18 @@
+.navbar {
+    background-color: rgb(59, 71, 110);
+    box-shadow: 4px 4px rgba(0,0,0,0.1);
+}
+
+.navbar a{
+    color: rgb(255, 255, 255);
+}
+
+
+.navbar a:active{
+    color: rgb(0, 174, 255) !important;
+}
+
+.card:hover{
+    cursor: pointer;
+    box-shadow: 4px 4px rgba(0,0,0,0.1);
+}
