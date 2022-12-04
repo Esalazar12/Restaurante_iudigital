@@ -1,42 +1,71 @@
+import React, { useState } from 'react';
+import { crearRestaurante } from './restaurantesService';
+import Swal from 'sweetalert2';
 
-import { v4 as uuid } from 'uuid';
-import React, { useState } from 'react'
-import { listaRestaurantes } from './info-restaurantes'
 
 export const NuevoRestaurante = () => {
 
-  const [restaurantes, setRestaurantes] = useState(listaRestaurantes);
 
-  const handleSubmit = (event) => {
-    setRestaurantes({
-      ...restaurantes,
-      id: uuid(),
-      [event.target.name] : event.target.value
-    })
-    console.log(event)
+  const [ valoresFormulario, setValoresFormulario ] = useState({});
+  const { nombre = '', descripcion = '', direccion = '', imagen = ''  } = valoresFormulario;
+
+
+  // permite asignar los valores del formulario a la variable de estado  formValues
+  const handleOnChange = (e) => {
+    setValoresFormulario({ ...valoresFormulario, [e.target.name]: e.target.value });
   }
 
-  return<>
-  <form>
-        <div className="container-fluid mb-3 mt-3 ">
-            <label className="form-label">Nombre</label>
-            <input type="input" name='nombre' className="form-control" onChange={handleSubmit}  aria-describedby="Nombre" />
-        </div>
-        <div className=" container-fluid mb-3 mt-3">
-            <label  className="form-label">Descripcion</label>
-            <input type="input" name='descripcion' className="form-control" onChange={handleSubmit} />
-        </div>
 
-        <div className=" container-fluid mb-3 mt-3">
-            <label  className="form-label">Direccion</label>
-            <input type="input" name='direccion' className="form-control"/>
-        </div>
+  // pinta los valores del formulario cuando presionan el boton
+  const handleOnSubmit = async (e) => {
 
-        <div className="container-fluid mb-3 mt-3">
-            <label  className="form-label">Imagen URL</label>
-            <input type="input" name='imagen' className="form-control" onChange={handleSubmit} />
-            <button type="submit" className=" mt-3 btn btn-primary" onSubmit={handleSubmit}>Guardar</button>
+
+    e.preventDefault(); // evita que se recargue el formulario
+    console.log(valoresFormulario);
+    try {
+      Swal.fire({ allowOutsideClick: false, text: "Cargando..."});
+      Swal.showLoading();
+      await crearRestaurante(valoresFormulario);
+      Swal.close();
+
+      console.log('Creado desde la pagina nuevo restaurante');
+      setValoresFormulario ({nombre: "", descripcion: "", direccion: "", imagen: ""});
+
+
+    } catch (error) {
+      Swal.close();
+      console.log(error);
+    }
+  }
+
+
+
+  return (
+    <div className="container-fluid mt-3">
+      <form onSubmit={(e) => handleOnSubmit(e)}>
+        <div className="mb-3">
+          <label className="form-label">Nombre</label>
+          <input required type="text" name="nombre" value={nombre} 
+              className="form-control" onChange={ (e) => { handleOnChange(e) } } />
         </div>
-    </form>
-  </>
+        <div className="mb-3">
+          <label className="form-label">Direccion</label>
+          <input required type="text" className="form-control" name='direccion' 
+              value={ direccion } onChange={ (e) => { handleOnChange(e) } } />
+        </div>
+        <div className="mb-3">
+          <label className="form-label">Descripcion</label>
+          <input required type="text" name="descripcion" value={descripcion} 
+              className="form-control" onChange={ (e) => { handleOnChange(e) } } />
+        </div>
+        
+        <div className="mb-3">
+          <label className="form-label">URL de la Imagen</label>
+          <input required type="text" className="form-control" name='imagen' 
+              value={ imagen } onChange={ (e) => { handleOnChange(e) } } />
+        </div>
+        <button type="submit" className="btn btn-primary">Guardar</button>
+      </form>
+    </div>
+  )
 }

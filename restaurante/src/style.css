@@ -1,6 +1,10 @@
+body{
+    background-color: rgb(240, 240, 240);
+}
+
 .navbar {
-    background-color: rgb(59, 71, 110);
-    box-shadow: 4px 4px rgba(0,0,0,0.1);
+    background-color: rgb(42, 105, 156);
+    box-shadow: 4px 4px rgb(255, 0, 0, 0.1);
 }
 
 .navbar a{
@@ -12,7 +16,21 @@
     color: rgb(0, 174, 255) !important;
 }
 
+.card {
+    width: 18rem;
+    box-shadow: 0 4px 8px 0 rgb(100, 100, 100);
+    transition: 0.3s;
+}
+
 .card:hover{
     cursor: pointer;
-    box-shadow: 4px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 16px 0 rgb(54, 54, 54);
+}
+
+.card-title {
+    margin-left: 15px;
+}
+
+.card-img-top {
+    max-height: 200px;
 }
