@@ -55,7 +55,7 @@ const Buscar = () => {
                     
                 </form>
                 <div className="container mt-5">
-            <div className=" row mt-3 cols-1 ">
+            <div className="mt-2 mb-2 row row-cols-1 row-cols-md-4 g-4">
                 {
                     restaurantes.map(restaurantes => {
                         return (
